@@ -4,41 +4,357 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.selenium</groupId>
-    <artifactId>selenium-pom-java</artifactId>
+    <groupId>com.rain.selenium</groupId>
+    <artifactId>rain-test-automation</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!--    <packaging>war</packaging>-->
+    <name>Rain Automation</name>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <slf4j.version>1.7.30</slf4j.version>
+        <log4j2.version>2.13.1</log4j2.version>
+        <teestng.version>x.x.x</teestng.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
+        <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
+        <maven-jxr-plugin.version>3.0.0</maven-jxr-plugin.version>
+        <springframework.version>x.x.x</springframework.version>
+        <jackson.version>x.x.x</jackson.version>
+        <javax.servlet-api.version>x.x.x</javax.servlet-api.version>
+        <surefire.and.failsafe.report.dir>target/test-report</surefire.and.failsafe.report.dir>
+        <environment>STAGE</environment>
+        <BuildNumber>1</BuildNumber>
+        <Project>Default</Project>
+    </properties>
 
     <dependencies>
-    <dependency>
-        <groupId>org.testng</groupId>
-        <artifactId>testng</artifactId>
-        <version>6.11</version>
-    </dependency>
-    <dependency>
-        <groupId>com.aventstack</groupId>
-        <artifactId>extentreports</artifactId>
-        <version>4.0.9</version>
-    </dependency>
 
-    <dependency>
-        <groupId>io.github.bonigarcia</groupId>
-        <artifactId>webdrivermanager</artifactId>
-        <version>3.7.1</version>
-        <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>3.141.59</version>
-    </dependency>
+            <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.8</version>
+            </dependency>
+
+            <!--EXTENT REPORT-->
+            <dependency>
+                <groupId>com.aventstack</groupId>
+                <artifactId>extentreports</artifactId>
+                <version>4.0.9</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.aventstack/klov-reporter -->
+            <dependency>
+                <groupId>com.aventstack</groupId>
+                <artifactId>klov-reporter</artifactId>
+                <version>5.0.4</version>
+            </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.github.autoexsel/autoexsel -->
+            <dependency>
+                <groupId>com.github.autoexsel</groupId>
+                <artifactId>autoexsel</artifactId>
+                <version>1.0.1</version>
+            </dependency>
+
+
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>3.8.1</version>
-            <scope>compile</scope>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>3.8.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>3.141.59</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>2.13.3</version>
+                 <scope>test</scope>
+            </dependency>
+
+
+        <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+
+            <!-- https://www.baeldung.com/reflections-library-->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.9.11</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.11</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/junit/junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <!--<scope>test</scope>-->
+            </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.4.1</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/properties-maven-plugin -->
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.codehaus.gmavenplus/gmavenplus-plugin -->
+        <dependency>
+            <groupId>org.codehaus.gmavenplus</groupId>
+            <artifactId>gmavenplus-plugin</artifactId>
+            <version>1.10.1</version>
+        </dependency>
+
+        <!--to send email-->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <!-- Source directory configuration -->
+        <sourceDirectory>src</sourceDirectory>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <!-- Suite testng xml file to consider for test execution -->
+                        <suiteXmlFiles>
+                            <suiteXmlFile>test.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+<!--                <plugin>-->
+<!--                        &lt;!&ndash;For running integration test&ndash;&gt;-->
+<!--                        &lt;!&ndash;Integration tests are executed with maven-failsafe.&ndash;&gt;-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-failsafe-plugin</artifactId>-->
+<!--                    <version>${maven-failsafe-plugin.version}</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>integration-tests</id>-->
+<!--                            <goals>-->
+<!--                                <goal>integration-test</goal>-->
+<!--                                <goal>verify</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                &lt;!&ndash;<argLine>${failsafeArgLine}</argLine>&ndash;&gt;-->
+<!--                                <failIfNoTests>false</failIfNoTests>-->
+<!--                                <encoding>${project.build.sourceEncoding}</encoding>-->
+<!--                                <reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>-->
+<!--                                <excludes>-->
+<!--                                    <exclude>**/IT*.java</exclude>-->
+<!--                                    <exclude>**/*IT.java</exclude>-->
+<!--                                </excludes>-->
+<!--                                <workingDirectory>${project.build.directory}</workingDirectory>-->
+<!--                                <encoding>${project.build.sourceEncoding}</encoding>-->
+<!--                                <systemPropertyVariables>-->
+<!--                                    <BaseDirectory>${project.basedir}</BaseDirectory>-->
+<!--                                    <Environment>${environment}</Environment>-->
+<!--                                    <BuildNumber>${BuildNumber}</BuildNumber>-->
+<!--                                    <Project>${Project}</Project>-->
+<!--                                </systemPropertyVariables>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
+
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-war-plugin</artifactId>-->
+<!--                    <version>${maven-war-plugin.version}</version>-->
+<!--                    <configuration>-->
+<!--                        <warSourceDirectory>src/main/webapp</warSourceDirectory>-->
+<!--                        <warName>rain-automation</warName>-->
+<!--                        <failOnMissingWebXml>false</failOnMissingWebXml>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
+            </plugins>
+        </pluginManagement>
+    </build>
+
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--        <id>rainTest</id>-->
+<!--            <activation>-->
+<!--                <activeByDefault>false</activeByDefault>-->
+<!--            </activation>-->
+<!--            <build>-->
+<!--                <plugins>-->
+<!--                    <plugin>-->
+<!--                            &lt;!&ndash;Unit tests are traditionally executed with maven-surefire.&ndash;&gt;-->
+<!--                            <groupId>org.apache.maven.plugins</groupId>-->
+<!--                            <artifactId>maven-surefire-report-plugin</artifactId>-->
+<!--                            <version>${maven-surefire-plugin.version}</version>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash;<argLine>${failsafeArgLine}</argLine>&ndash;&gt;-->
+<!--                            <failIfNoTests>false</failIfNoTests>-->
+<!--                            <encoding>${project.build.sourceEncoding}</encoding>-->
+<!--                            <reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>-->
+<!--                            <excludes>-->
+<!--                                <exclude>**/IT*.java</exclude>-->
+<!--                                <exclude>**/*IT.java</exclude>-->
+<!--                            </excludes>-->
+<!--                            <suiteXmlFiles>-->
+<!--                                <suiteXmlFile>test.xml</suiteXmlFile>-->
+<!--                            </suiteXmlFiles>-->
+<!--                            <workingDirectory>${project.build.directory}</workingDirectory>-->
+<!--                            <encoding>${project.build.sourceEncoding}</encoding>-->
+<!--                            <systemPropertyVariables>-->
+<!--                                <BaseDirectory>${project.basedir}</BaseDirectory>-->
+<!--                                <Environment>${environment}</Environment>-->
+<!--                                <BuildNumber>${BuildNumber}</BuildNumber>-->
+<!--                                <Project>${Project}</Project>-->
+<!--                            </systemPropertyVariables>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+
+<!--&lt;!&ndash;                    <plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <groupId>org.apache.maven.plugins</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <artifactId>maven-jxr-plugin</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <version>${maven-jxr-plugin.version}</version>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </plugin>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;                        &lt;!&ndash;The Properties Maven Plugin is here to make life a little easier when dealing with properties.&ndash;&gt;-->
+<!--&lt;!&ndash;                        It provides goals to read and write properties from files.&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                        <groupId>org.codehaus.mojo</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <artifactId>properties-maven-plugin</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <version>1.0.0</version>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <executions>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <execution>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <phase>compile</phase>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <goal>write-project-properties</goal>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <outputFile>${project.build.outputDirectory}/rain.properties</outputFile>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </execution>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </executions>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </plugin>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;                        &lt;!&ndash;maven-replacer-plugin:replacer is a build plugin to replace tokens within&ndash;&gt;-->
+<!--&lt;!&ndash;                        a file with a given value and fully supports regular expressions.&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                        <groupId>com.google.code.maven-replacer-plugin</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <artifactId>replacer</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <version>1.5.3</version>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <executions>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <execution>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <phase>test</phase>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <goal>replace</goal>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </execution>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </executions>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <file>target/${project.artifactId}/somefile.txt</file>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <replacements>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <replacement>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <token>SOME TOKEN</token>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <value>SOME VALUE</value>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </replacement>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </replacements>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </plugin>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;                        &lt;!&ndash;This plugin is to compile the Groovy code. refer https://github.com/groovy/GMavenPlus/wiki&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                        <groupId>org.codehaus.gmavenplus</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <artifactId>gmavenplus-plugin</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <version>1.10.1</version>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <executions>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <execution>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <goal>compile</goal>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <goal>testCompile</goal>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </execution>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </executions>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </plugin>&ndash;&gt;-->
+
+<!--                </plugins>-->
+<!--            </build>-->
+<!--        </profile>-->
+<!--    </profiles>-->
+
+    <reporting>
+<!--        Reporting plugins are executed during the site generation and configured in the <reporting/> element.-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>project-team</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
+                    <outputName>rain-Test-Automation-Execution-Report-${maven.build.timestamp}</outputName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

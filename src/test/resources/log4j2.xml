@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+
+        <!--    ===========================================================     -->
+        <!--    Possible Values                                                 -->
+        <!--    ALL<DEBUG<INFO<WARN<ERROR<FATAL<OFF                             -->
+        <!--    ===========================================================     -->
+
+<!--    Reference: https://howtodoinjava.com/log4j2/log4j-2-xml-configuration-example/-->
+
+    <!-- Logging Properties -->
+    <Properties>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} %-5level %logger{36} - %msg%n</Property>
+        <Property name="APP_LOG_ROOT">./log</Property>
+    </Properties>
+
+
+    <Appenders>
+        <!--    Append messages to the console                                  -->
+        <Console name="LogToConsole" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!--    LOGGING TO A FILE-->
+        <RollingFile name="LogToRollingFile" fileName="${APP_LOG_ROOT}/rain-Tests.log" filePattern="${APP_LOG_ROOT}/$${date:yyyy-MM}/rain-Test-%d{yyyy-MM-dd}.log"
+                     immediateFlush="false" append="true">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <pattern>${LOG_PATTERN}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/> <!--By default, it will create up to 7 archives on the same day.-->
+        </RollingFile>
+
+        <RollingFile name="LogToRollingErrorFile" fileName="${APP_LOG_ROOT}/rain-Tests-err.log" filePattern="${APP_LOG_ROOT}/$${date:yyyy-MM}/rain-Test-err-%d{yyyy-MM-dd}.log"
+                     immediateFlush="false" append="true">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <pattern>${LOG_PATTERN}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/> <!--By default, it will create up to 7 archives on the same day.-->
+        </RollingFile>
+
+<!--        To send logs in email.-->
+<!--        <SMTP name="LogToMail" subject="Error Log From Log4j"-->
+<!--              from="from@DOMAIN"-->
+<!--              to="to@DOMAIN"-->
+<!--              smtpHost="smtp.mailgun.org"-->
+<!--              smtpPort="25"-->
+<!--              smtpUsername="abc"-->
+<!--              smtpPassword="123"-->
+<!--              bufferSize="100">-->
+<!--        </SMTP>-->
+
+    </Appenders>
+
+    <Loggers>
+
+        <!--    =================================== -->
+        <!--            LIMIT CATEGORIES            -->
+        <!--    =================================== -->
+
+        <!--    Our own classes-->
+        <!-- avoid duplicated logs with additivity=false -->
+        <Logger name="com.springframework" level="debug" additivity="false">
+            <AppenderRef ref="LogToRollingFile"/>
+            <AppenderRef ref="LogToRollingErrorFile"/>
+        </Logger>
+
+        <Logger name="org.seleniumhq.selenium" level="debug" additivity="false">
+            <AppenderRef ref="LogToRollingFile"/>
+            <AppenderRef ref="LogToRollingErrorFile"/>
+        </Logger>
+
+        <Logger name="org.apache.http" level="debug" additivity="false">
+            <AppenderRef ref="LogToRollingFile"/>
+            <AppenderRef ref="LogToRollingErrorFile"/>
+        </Logger>
+
+        <Logger name="org.reflections.Reflections" level="debug" additivity="false">
+            <AppenderRef ref="LogToRollingFile"/>
+            <AppenderRef ref="LogToRollingErrorFile"/>
+        </Logger>
+
+        <!--    =================================== -->
+        <!--            Setup the Root Logger       -->
+        <!--    =================================== -->
+
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToRollingFile"/>
+            <AppenderRef ref="LogToRollingErrorFile"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
