@@ -154,7 +154,7 @@
 
     <build>
         <!-- Source directory configuration -->
-        <sourceDirectory>src</sourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
 
         <pluginManagement>
             <plugins>

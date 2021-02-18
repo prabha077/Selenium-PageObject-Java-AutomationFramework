@@ -1,5 +1,7 @@
 target/*
 .idea/*
 AutomationReports/*
-log
-
+log/*
+rain-test-automation.iml
+.project
+.settings
